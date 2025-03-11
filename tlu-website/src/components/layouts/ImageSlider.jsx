@@ -34,7 +34,7 @@ function ImageSlider() {
   };
 
   return (
-    <div className="relative w-full h-[600px] overflow-hidden z-0">
+    <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden z-0">
       {/* Hiển thị ảnh */}
       <div className="relative w-full h-full">
         {images.map((image, index) => (
@@ -51,19 +51,35 @@ function ImageSlider() {
 
       {/* Nút Previous */}
       <button
-        className="absolute left-2 top-1/2 px-3 text-white hover:opacity-70 transition-all duration-300 ease-out"
+        className="absolute left-1 sm:left-2 top-1/2 px-1 sm:px-3 text-white hover:opacity-70 transition-all duration-300 ease-out -translate-y-1/2"
         onClick={prevImage}
       >
-        <SlArrowLeft size={40} />
+        <SlArrowLeft size={20} className="sm:hidden" />
+        <SlArrowLeft size={40} className="hidden sm:block" />
       </button>
 
       {/* Nút Next */}
       <button
-        className="absolute right-2 top-1/2 px-3 text-white hover:opacity-70 transition-all duration-300 ease-out"
+        className="absolute right-1 sm:right-2 top-1/2 px-1 sm:px-3 text-white hover:opacity-70 transition-all duration-300 ease-out -translate-y-1/2"
         onClick={nextImage}
       >
-        <SlArrowRight size={40} />
+        <SlArrowRight size={20} className="sm:hidden" />
+        <SlArrowRight size={40} className="hidden sm:block" />
       </button>
+
+      {/* Indicator dots */}
+      <div className="absolute bottom-2 sm:bottom-4 w-full flex justify-center space-x-1 sm:space-x-2">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${
+              index === currentIndex ? "bg-white" : "bg-white/50"
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          ></button>
+        ))}
+      </div>
     </div>
   );
 }

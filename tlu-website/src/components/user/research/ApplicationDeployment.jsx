@@ -25,27 +25,29 @@ function ApplicationDeployment() {
     <div>
       <NavBar />
 
-      <div>
-        <div className="px-55 mx-auto mb-10 mt-30">
+      <div className="mt-[80px] md:mt-[120px]">
+        <div className="px-4 sm:px-6 lg:px-20 xl:px-55 mx-auto mb-6 md:mb-10">
           <SmallNavBar navigationLinks={sampleData.navigationLinks} />
 
-          <div className="flex gap-x-30">
-            <div>
+          <div className="flex flex-col md:flex-row gap-6 md:gap-x-10 lg:gap-x-30">
+            <div className="w-full md:w-auto">
               <Sidebar title="Nghiên cứu" items={sidebarData} />
             </div>
 
-            <div>
-                <p className='text-[#192E58] font-bold text-3xl pb-10'>Triển khai ứng dụng</p>
-                <div className="space-y-3 leading-loose">
-                    <p>Bên cạnh những nghiên cứu mang tính lý thuyết, Khoa CNTT cũng tích cực triển khai các nghiên cứu triển khai ứng dụng vào thực tế. Một số đề tài tiêu biểu gồm: </p>
-                    <ul className="list-disc list-inside space-y-10">
-                        <li>Hệ thống phần mềm điều hành và quản lý đào tạo Đại học Thủy lơi - DTS:</li>
-                        <img className="mx-auto" src="/assets/tlusoftware.png"></img>
-                        <li>WARM (2018-2021): Xây dựng nền tảng số hỗ trợ quản lý dựa trên công nghệ mô hình hóa trong toán học và khoa học máy tính nhằm tối ưu hóa hoạt động của các hệ thống thủy lợi, dựa trên các mục tiêu kinh tế và chính trị cũng như giảm thiểu tác động tiêu cực của việc sử dụng nước đối với môi trường.</li>
-                    </ul>
-                </div>
+            <div className="w-full pr-0 md:pr-6 lg:pr-10">
+              <p className="text-[#192E58] font-bold text-xl sm:text-2xl md:text-3xl pb-4 sm:pb-6 md:pb-10">Triển khai ứng dụng</p>
+              <div className="space-y-3 leading-loose text-sm sm:text-base">
+                <p>Bên cạnh những nghiên cứu mang tính lý thuyết, Khoa CNTT cũng tích cực triển khai các nghiên cứu triển khai ứng dụng vào thực tế. Một số đề tài tiêu biểu gồm: </p>
+                <ul className="list-disc list-inside space-y-5 sm:space-y-10">
+                  <li className="mb-2">Hệ thống phần mềm điều hành và quản lý đào tạo Đại học Thủy lơi - DTS:</li>
+                  <div className="w-full flex justify-center my-4">
+                    <img className="w-full max-w-md h-auto" src="/assets/tlusoftware.png" alt="TLU Software" />
+                  </div>
+                  
+                  <li className="mt-4">WARM (2018-2021): Xây dựng nền tảng số hỗ trợ quản lý dựa trên công nghệ mô hình hóa trong toán học và khoa học máy tính nhằm tối ưu hóa hoạt động của các hệ thống thủy lợi, dựa trên các mục tiêu kinh tế và chính trị cũng như giảm thiểu tác động tiêu cực của việc sử dụng nước đối với môi trường.</li>
+                </ul>
+              </div>
             </div>
-
           </div>
         </div>
       </div>

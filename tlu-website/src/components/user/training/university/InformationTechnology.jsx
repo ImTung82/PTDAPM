@@ -29,43 +29,46 @@ function InformationTechnology() {
     <div>
       <NavBar />
       <div>
-        <div className='px-55 mx-auto mb-10 mt-30'>
+        <div className='px-4 sm:px-8 lg:px-55 mx-auto mb-6 sm:mb-10 mt-[80px] md:mt-[120px]'>
           <SmallNavBar navigationLinks={sampleData.navigationLinks} />
-          <div className='grid grid-cols-12 gap-6'>
-            <div className='col-span-4'>
-              <Sidebar title='Đào tạo Đại học' items={sidebarData1} />
-              <Sidebar title='Đào tạo Sau đại học' items={sidebarData2} />
+          <div className='grid grid-cols-1 md:grid-cols-12 gap-6'>
+            <div className='md:col-span-4'>
+              <div className="mb-6 md:mb-0">
+                <Sidebar title='Đào tạo Đại học' items={sidebarData1} />
+              </div>
+              <div className="mt-6">
+                <Sidebar title='Đào tạo Sau đại học' items={sidebarData2} />
+              </div>
             </div>
-            <div className='col-span-6'>
-              <h2 className="text-4xl font-bold text-[#060A52] mb-9">Ngành Công nghệ thông tin</h2>
+            <div className='md:col-span-8 lg:col-span-6'>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#060A52] mb-6 md:mb-9">Ngành Công nghệ thông tin</h2>
               <p className='my-4'>Công nghệ thông tin là ngành đào tạo các kỹ sư – cử nhân đảm nhận nhiệm vụ xây dựng và duy trì hệ thống công nghệ thông tin cho các tổ chức, doanh nghiệp, cơ quan chính phủ v.v. </p>
               <p>Cử nhân công nghệ thông tin có khả năng thiết kế, triển khai và duy trì các hạ tầng công nghệ thông tin cho tổ chức hoặc doanh nghiệp. Nhiệm vụ quan trọng của họ là cài đặt mạng máy tính, đảm bảo an toàn và ổn định hoạt động của mạng. Họ cũng có khả năng lựa chọn và triển khai các giải pháp hệ thống, bao gồm việc lập trình, mua sắm và tích hợp các thành phần hệ thống. </p>
               <p className='my-4 font-bold'>MỤC TIÊU ĐÀO TẠO </p>
               <ul className='my-4'>
                 <p>Sau khi tốt nghiệp ngành Khoa học máy tính, sinh viên sẽ đạt được những yêu cầu sau: </p>
-                <li>&bull;  Đào tạo các cử nhân có kiến thức rộng và cập nhật về công nghệ thông tin, bao gồm phần cứng, phần mềm, quản lý dự án CNTT. Có khả năng giải quyết vấn đề và chọn lựa giải pháp công nghệ.</li>
-                <li>&bull;  Cử nhân CNTT là người có năng lực làm việc với các đối tượng khác nhau trong tổ chức, có kỹ năng giao tiếp và thuyết phục, để thực hiện thành công các dự án</li>
-                <li>&bull;  Cử nhân CNTT cần nắm vững một số ngôn ngữ lập trình và khả năng xây dựng phần mềm để phục vụ các yêu cầu cụ thể của công việc.</li>
+                <li className="ml-4 mt-2">&bull;  Đào tạo các cử nhân có kiến thức rộng và cập nhật về công nghệ thông tin, bao gồm phần cứng, phần mềm, quản lý dự án CNTT. Có khả năng giải quyết vấn đề và chọn lựa giải pháp công nghệ.</li>
+                <li className="ml-4 mt-2">&bull;  Cử nhân CNTT là người có năng lực làm việc với các đối tượng khác nhau trong tổ chức, có kỹ năng giao tiếp và thuyết phục, để thực hiện thành công các dự án</li>
+                <li className="ml-4 mt-2">&bull;  Cử nhân CNTT cần nắm vững một số ngôn ngữ lập trình và khả năng xây dựng phần mềm để phục vụ các yêu cầu cụ thể của công việc.</li>
               </ul>
               <p className='my-4 font-bold'>SỰ NGHIỆP TƯƠNG LAI </p>
               <ul className='my-4'>
                 <p> Cử nhân tốt nghiệp ngành Công nghệ thông tin có thể làm các công việc: </p>
-                <li>&bull;  Phân tích, thiết kế và cài đặt các hệ thống công nghệ thông tin (mạng máy tính, phần cứng, phần mềm, dịch vụ) cho một tổ chức. </li>
-                <li>&bull;  Quản lý hệ thống thông tin. Duy trì sự làm việc an toàn và hiệu quả của hệ thống. Chuyên viên cấp cao về Công nghệ thông tin, giám đốc công nghệ (CTO) của tổ chức. </li>
-                <li>&bull;  Lập trình, đảm bảo an ninh mạng, quản lý dự án Công nghệ thông tin. </li>
+                <li className="ml-4 mt-2">&bull;  Phân tích, thiết kế và cài đặt các hệ thống công nghệ thông tin (mạng máy tính, phần cứng, phần mềm, dịch vụ) cho một tổ chức. </li>
+                <li className="ml-4 mt-2">&bull;  Quản lý hệ thống thông tin. Duy trì sự làm việc an toàn và hiệu quả của hệ thống. Chuyên viên cấp cao về Công nghệ thông tin, giám đốc công nghệ (CTO) của tổ chức. </li>
+                <li className="ml-4 mt-2">&bull;  Lập trình, đảm bảo an ninh mạng, quản lý dự án Công nghệ thông tin. </li>
               </ul>
               <p className='text-[#C10629] font-bold'>Chi tiết xem tại đây 👈</p>
             </div>
-              <div className='col-span-2 text-right text-[#192E58]'>
-              <p class="font-bold border-b pb-2 mb-2 text-[14px]">Mã ngành: <span class="font-bold text-[#C10629]">7480201</span></p>
-                <p className='font-bold my-5 text-[14px]'>Thời gian học: <span class="font-extrabold">4 năm</span></p>
-                <p className='font-bold text-[14px]'>Tổ hợp môn thi: A00, A01</p>
-              </div>
+            <div className='md:col-span-12 lg:col-span-2 text-left md:text-right text-[#192E58]'>
+              <p className="font-bold border-b pb-2 mb-2 text-[14px]">Mã ngành: <span className="font-bold text-[#C10629]">7480201</span></p>
+              <p className='font-bold my-5 text-[14px]'>Thời gian học: <span className="font-extrabold">4 năm</span></p>
+              <p className='font-bold text-[14px]'>Tổ hợp môn thi: A00, A01</p>
+            </div>
           </div>
         </div>
       </div>
       <Footer />
-      
     </div>
   )
 }
