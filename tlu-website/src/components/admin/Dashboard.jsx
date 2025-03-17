@@ -25,7 +25,7 @@ const Dashboard = () => {
           </div>
 
           <div>
-            <a href="/admin/danh">
+            <a href="/admin/danh-muc">
               <div className="text-2xl mb-2 text-blue-600">
                 <i className="fas fa-folder"></i>
               </div>
