@@ -10,7 +10,7 @@ function ArticleOther({ title, imageUrl, date, excerpt, link }) {
 
   return (
     <div className="flex flex-row gap-10 h-52">
-      <div className="overflow-hidden w-1/3 h-full flex-shrink-0">
+      <div className="overflow-hidden w-1/3 h-full flex-shrink-0 rounded-md">
         <Link to={link || "#"}>
           <img
             src={imageUrl || "/assets/article_image_sample.png"}

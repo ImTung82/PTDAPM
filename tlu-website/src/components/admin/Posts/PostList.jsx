@@ -137,6 +137,7 @@ function PostList() {
             objectFit: "cover",
             borderRadius: "4px",
           }}
+          loading="lazy"
         />
       ),
     },
