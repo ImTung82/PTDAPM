@@ -94,48 +94,46 @@ function ReseachStudent() {
     <div>
       <NavBar />
 
-      <div>
-        <div className="px-55 mx-auto mb-10 mt-30">
-          <SmallNavBar navigationLinks={navigationLinks} />
+      <main>
+        <SmallNavBar navigationLinks={navigationLinks} />
 
-          <div className="flex gap-x-30">
-            <div>
-              <Sidebar title="Nghiên cứu" items={sidebarData} />
-            </div>
+        <div className="flex gap-x-30">
+          <div className='w-1/4'>
+            <Sidebar title="Nghiên cứu" items={sidebarData} />
+          </div>
 
-            <div className="pr-10 w-3/4">
-              <HighlightHeader title="SINH VIÊN NCKH" />
-              
-              {loading ? (
-                <div className="flex justify-center items-center py-20">
-                  <p>Đang tải danh sách sinh viên NCKH...</p>
-                </div>
-              ) : error ? (
-                <div className="flex justify-center items-center py-20">
-                  <p className="text-red-500">{error}</p>
-                </div>
-              ) : projects.length === 0 ? (
-                <div className="flex justify-center items-center py-20">
-                  <p>Chưa có thông tin về sinh viên NCKH</p>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-y-5">
-                  {projects.map((project) => (
-                    <ArticleOther 
-                      key={project._id}
-                      title={project.title}
-                      imageUrl={project.thumbnail}
-                      date={project.updated_at || project.created_at}
-                      excerpt={project.description || project.detail?.substring(0, 200).replace(/<\/?[^>]+(>|$)/g, "")}
-                      link={`/nghien-cuu/sinh-vien-nckh/chi-tiet/${project._id}`}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
+          <div className="w-3/4">
+            <HighlightHeader title="SINH VIÊN NCKH" />
+            
+            {loading ? (
+              <div className="flex justify-center items-center py-20">
+                <p>Đang tải danh sách sinh viên NCKH...</p>
+              </div>
+            ) : error ? (
+              <div className="flex justify-center items-center py-20">
+                <p className="text-red-500">{error}</p>
+              </div>
+            ) : projects.length === 0 ? (
+              <div className="flex justify-center items-center py-20">
+                <p>Chưa có thông tin về sinh viên NCKH</p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-y-5">
+                {projects.map((project) => (
+                  <ArticleOther 
+                    key={project._id}
+                    title={project.title}
+                    imageUrl={project.thumbnail}
+                    date={project.updated_at || project.created_at}
+                    excerpt={project.description || project.detail?.substring(0, 200).replace(/<\/?[^>]+(>|$)/g, "")}
+                    link={`/nghien-cuu/sinh-vien-nckh/chi-tiet/${project._id}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      </main>
 
       <Footer />
     </div>
