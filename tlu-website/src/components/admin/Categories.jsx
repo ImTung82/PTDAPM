@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Toolbar from "../layouts/Toolbar";
 import { message, Popconfirm } from "antd"; // Import Ant Design components
-
+import { backendUrl } from "../../App";
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -22,7 +22,7 @@ const Categories = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/categories");
+      const response = await axios.get(backendUrl + "/api/categories");
       setCategories(response.data);
       setErrors({ name: "" });
     } catch (err) {
@@ -56,14 +56,14 @@ const Categories = () => {
 
   const handleAddCategory = async (e) => {
     e.preventDefault();
-    
+
     // Validate form trước khi submit
     if (!validateForm()) {
       return;
     }
 
     try {
-      await axios.post("http://localhost:4000/api/categories", {
+      await axios.post(backendUrl + "/api/categories", {
         name,
         parent_id: parentCategory || null, // Gửi parent_id nếu có
       });
@@ -86,17 +86,20 @@ const Categories = () => {
 
   const handleUpdateCategory = async (e) => {
     e.preventDefault();
-    
+
     // Validate form trước khi submit
     if (!validateForm()) {
       return;
     }
 
     try {
-      await axios.put(`http://localhost:4000/api/categories/${currentCategory._id}`, {
-        name,
-        parent_id: parentCategory || null, // Cập nhật danh mục lớn
-      });
+      await axios.put(
+        backendUrl + `/api/categories/${currentCategory._id}`,
+        {
+          name,
+          parent_id: parentCategory || null, // Cập nhật danh mục lớn
+        }
+      );
 
       resetForm();
       fetchCategories();
@@ -126,7 +129,9 @@ const Categories = () => {
 
   const handleDeleteConfirm = async (category) => {
     try {
-      await axios.delete(`http://localhost:4000/api/categories/${category._id}`);
+      await axios.delete(
+        backendUrl +`/api/categories/${category._id}`
+      );
       setCategories(categories.filter((cat) => cat._id !== category._id));
       message.success("Danh mục đã được xóa thành công!");
     } catch (error) {
@@ -193,10 +198,20 @@ const Categories = () => {
                         />
                       </td>
                       <td className="pl-4">{category._id}</td>
-                      <td>{category.parent_id ? `${categories.find(c => c._id === category.parent_id)?.name || ""} >>` : ""} {category.name}</td>
                       <td>
                         {category.parent_id
-                          ? categories.find((c) => c._id === category.parent_id)?.name || ""
+                          ? `${
+                              categories.find(
+                                (c) => c._id === category.parent_id
+                              )?.name || ""
+                            } >>`
+                          : ""}{" "}
+                        {category.name}
+                      </td>
+                      <td>
+                        {category.parent_id
+                          ? categories.find((c) => c._id === category.parent_id)
+                              ?.name || ""
                           : ""}
                       </td>
                       <td>
@@ -364,14 +379,16 @@ const Categories = () => {
                         className="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       >
                         <option value="">Chọn danh mục lớn</option>
-                        {categories.map((category) => (
-                          // Không hiển thị danh mục đang sửa trong danh sách danh mục lớn
-                          currentCategory && category._id !== currentCategory._id && (
-                            <option key={category._id} value={category._id}>
-                              {category.name}
-                            </option>
-                          )
-                        ))}
+                        {categories.map(
+                          (category) =>
+                            // Không hiển thị danh mục đang sửa trong danh sách danh mục lớn
+                            currentCategory &&
+                            category._id !== currentCategory._id && (
+                              <option key={category._id} value={category._id}>
+                                {category.name}
+                              </option>
+                            )
+                        )}
                       </select>
                     </div>
                   </div>

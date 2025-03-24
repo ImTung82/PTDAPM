@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Toolbar from "../layouts/Toolbar";
 import { message, Popconfirm } from "antd"; // Import Ant Design components
-
+import { backendUrl } from "../../App";
 const AccountManager = () => {
   const [accounts, setAccounts] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -25,7 +25,7 @@ const AccountManager = () => {
 
   const fetchAccounts = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/account");
+      const response = await axios.get(backendUrl + "/api/account");
       setAccounts(response.data);
     } catch (err) {
       message.error("Không thể tải danh sách tài khoản");
@@ -43,7 +43,7 @@ const AccountManager = () => {
   const validateInputs = (isEdit = false, currentId = null) => {
     let tempErrors = { username: "", password: "" };
     let isValid = true;
-  
+
     if (!username.trim()) {
       tempErrors.username = "Username không được để trống";
       isValid = false;
@@ -51,12 +51,12 @@ const AccountManager = () => {
       tempErrors.username = "Tên tài khoản đã tồn tại";
       isValid = false;
     }
-  
+
     if (!password.trim()) {
       tempErrors.password = "Password không được để trống";
       isValid = false;
     }
-  
+
     setErrors(tempErrors);
     return { isValid, errors: tempErrors };
   };
@@ -81,7 +81,7 @@ const AccountManager = () => {
 
   const handleAddAccount = async (e) => {
     e.preventDefault();
-  
+
     const { isValid, errors } = validateInputs();
     if (!isValid) {
       // Hiển thị thông báo lỗi dựa theo hàm validateInputs
@@ -93,25 +93,25 @@ const AccountManager = () => {
       }
       return;
     }
-  
+
     try {
-      await axios.post("http://localhost:4000/api/account", {
+      await axios.post(backendUrl + "/api/account", {
         username: username.trim(),
         password,
         role: "trolykhoa",
       });
-  
+
       setUsername("");
       setPassword("");
       setErrors({ username: "", password: "" });
       setShowAddForm(false);
-  
+
       fetchAccounts();
       message.success("Tài khoản đã được tạo thành công"); // Use Ant Design message
     } catch (err) {
       if (err.response && err.response.data) {
         message.error(err.response.data.message || "Lỗi khi thêm tài khoản");
-  
+
         if (err.response.data.message === "Tên tài khoản đã tồn tại") {
           setErrors((prev) => ({
             ...prev,
@@ -135,7 +135,7 @@ const AccountManager = () => {
 
   const handleUpdateAccount = async (e) => {
     e.preventDefault();
-  
+
     const { isValid, errors } = validateInputs(true, currentAccount._id);
     if (!isValid) {
       // Hiển thị thông báo lỗi dựa theo hàm validateInputs
@@ -147,27 +147,28 @@ const AccountManager = () => {
       }
       return;
     }
-  
+
     try {
       const updateData = { username: username.trim(), password };
-  
+
       await axios.put(
-        `http://localhost:4000/api/account/${currentAccount._id}`,
+        backendUrl + `/api/account/${currentAccount._id}`,
         updateData
       );
-  
+
       setUsername("");
       setPassword("");
       setErrors({ username: "", password: "" });
       setShowEditForm(false);
       setCurrentAccount(null);
-  
+
       fetchAccounts();
       message.success("Cập nhật thông tin tài khoản thành công!"); // Use Ant Design message
     } catch (err) {
       if (err.response && err.response.data) {
-        const errorMessage = err.response.data.message || "Lỗi khi cập nhật tài khoản";
-        
+        const errorMessage =
+          err.response.data.message || "Lỗi khi cập nhật tài khoản";
+
         // Check for duplicate key error and set a user-friendly message
         if (errorMessage.includes("E11000 duplicate key error collection")) {
           setErrors((prev) => ({
@@ -187,7 +188,7 @@ const AccountManager = () => {
 
   const handleDeleteConfirm = async (account) => {
     try {
-      await axios.delete(`http://localhost:4000/api/account/${account._id}`);
+      await axios.delete(backendUrl + `/api/account/${account._id}`);
 
       setAccounts(accounts.filter((acc) => acc._id !== account._id));
 

@@ -12,8 +12,8 @@ import axios from "axios";
 import NavBar from "../../layouts/NavBar";
 import Toolbar from "../../layouts/Toolbar";
 import Footer from "../../layouts/Footer";
-
-const API_BASE_URL = "https://67d464bed2c7857431ed88c2.mockapi.io";
+import { backendUrl } from "../../../App";
+// Thay đổi API_BASE_URL để sử dụng MongoDB
 
 function PostDetail() {
   const { id } = useParams();
@@ -34,14 +34,14 @@ function PostDetail() {
       setLoading(true);
 
       // Lấy danh sách danh mục
-      const categoriesResponse = await axios.get(`${API_BASE_URL}/categories`);
+      const categoriesResponse = await axios.get(backendUrl + `/api/categories`);
       const catMap = {};
       const parentCatsMap = {};
 
       categoriesResponse.data.forEach((cat) => {
-        catMap[cat.id] = cat.name;
-        if (cat.parentId) {
-          parentCatsMap[cat.id] = cat.parentId;
+        catMap[cat._id] = cat.name;
+        if (cat.parent_id) {
+          parentCatsMap[cat._id] = cat.parent_id;
         }
       });
 
@@ -49,7 +49,7 @@ function PostDetail() {
       setParentCategories(parentCatsMap);
 
       // Lấy chi tiết bài viết
-      const response = await axios.get(`${API_BASE_URL}/posts/${id}`);
+      const response = await axios.get(backendUrl + `/api/posts/${id}`);
       setPost(response.data);
     } catch (error) {
       console.error("Lỗi khi tải chi tiết bài viết:", error);
@@ -62,7 +62,7 @@ function PostDetail() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${API_BASE_URL}/posts/${id}`);
+      await axios.delete(backendUrl + `/api/posts/${id}`);
       message.success("Xóa bài viết thành công!");
       navigate("/admin/bai-viet");
     } catch (error) {
@@ -192,7 +192,7 @@ function PostDetail() {
                 <div>
                   <h4>Danh mục</h4>
                   {(() => {
-                    const categoryId = post.categoryId;
+                    const categoryId = post.category_id;
                     const isChild = parentCategories[categoryId];
 
                     if (isChild && categories[parentCategories[categoryId]]) {
@@ -218,14 +218,14 @@ function PostDetail() {
                 {/* Thời gian */}
                 <div>
                   <h4>Ngày tạo</h4>
-                  <p className="text-gray-600">{formatDate(post.createdAt)}</p>
+                  <p className="text-gray-600">{formatDate(post.created_at)}</p>
                 </div>
 
                 <div>
                   <h4>Cập nhật lần cuối</h4>
-                  {post.updatedAt && post.updatedAt !== post.createdAt ? (
+                  {post.updated_at && post.updated_at !== post.created_at ? (
                     <p className="text-gray-600">
-                      {formatDate(post.updatedAt)}
+                      {formatDate(post.updated_at)}
                     </p>
                   ) : (
                     <p className="text-gray-400">Chưa chỉnh sửa</p>
@@ -276,7 +276,11 @@ function PostDetail() {
                     </Button>
                   </Popconfirm>
                   <Link to="/admin/bai-viet" className="block">
-                    <Button type="default" className="flex items-center gap-2" block>
+                    <Button
+                      type="default"
+                      className="flex items-center gap-2"
+                      block
+                    >
                       <ArrowLeftOutlined />
                       <span>Quay lại</span>
                     </Button>
@@ -295,10 +299,10 @@ function PostDetail() {
 
               {/* Thêm thông tin thời gian cập nhật dưới tiêu đề */}
               <div className="text-sm text-gray3 flex items-center gap-1">
-                {post.updatedAt && post.updatedAt !== post.createdAt ? (
-                  <span>{formatDate(post.updatedAt)}</span>
+                {post.updated_at && post.updated_at !== post.created_at ? (
+                  <span>{formatDate(post.updated_at)}</span>
                 ) : (
-                  <span>{formatDate(post.createdAt)}</span>
+                  <span>{formatDate(post.created_at)}</span>
                 )}
               </div>
             </div>
@@ -306,7 +310,7 @@ function PostDetail() {
             <div>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: post.content || "<p>Không có nội dung</p>",
+                  __html: post.detail || "<p>Không có nội dung</p>",
                 }}
                 className="prose max-w-none"
               />
