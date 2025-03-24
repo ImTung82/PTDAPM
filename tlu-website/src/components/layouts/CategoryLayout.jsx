@@ -32,7 +32,7 @@ function CategoryLayout({
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-30">
           {/* Sidebar */}
           <div className="lg:w-1/4">
-            <Sidebar title={sidebarTitle} items={menuItems} />
+            <Sidebar title={sidebarTitle} items={menuItems}/>
             {extraSidebar}
           </div>
 

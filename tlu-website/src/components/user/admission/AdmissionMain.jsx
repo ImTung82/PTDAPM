@@ -212,7 +212,7 @@ function AdmissionMain() {
 
   return (
     <CategoryLayout
-      title={type ? `Tuyển sinh ${admissionTypes[type]}` : "Tuyển sinh"}
+      title={type ? `TUYỂN SINH ${admissionTypes[type].toUpperCase()}` : "TUYỂN SINH"}
       sidebarTitle="Tuyển sinh"
       navigationLinks={navigationLinks}
       menuItems={menuItems}
@@ -220,6 +220,7 @@ function AdmissionMain() {
       loading={loading}
       error={error}
       baseUrl="/bai-viet/"
+
       pagination={
         <Pagination
           current={pagination.current}
